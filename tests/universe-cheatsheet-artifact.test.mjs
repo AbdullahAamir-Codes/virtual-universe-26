@@ -51,7 +51,7 @@ function fakeGh({ login = "learner", forks = ["learner/virtual-universe-26"], is
 
 async function harness(gh = fakeGh(), home = mkdtempSync(join(tmpdir(), "cheatsheet-"))) {
     let registration;
-    const script = source.replace(/^import .*;\n/gm, "").replaceAll("import.meta.url", JSON.stringify(extensionURL.href));
+    const script = source.replace(/^import .*;\r?\n/gm, "").replaceAll("import.meta.url", JSON.stringify(extensionURL.href));
     await vm.runInNewContext(`(async()=>{${script}})()`, {
         createServer, readFile, writeFile, mkdir, URL, URLSearchParams, setTimeout, JSON, Date, Number, String, Boolean, console, fileURLToPath,
         homedir: () => home, join, process: { env: { COPILOT_HOME: home } },
